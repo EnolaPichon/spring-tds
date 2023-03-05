@@ -1,5 +1,6 @@
 package edu.spring.stories
 
+import edu.spring.stories.entities.*
 import edu.spring.stories.repositories.StoryRepository
 import edu.spring.stories.repositories.TagRepository
 import org.assertj.core.api.Assertions

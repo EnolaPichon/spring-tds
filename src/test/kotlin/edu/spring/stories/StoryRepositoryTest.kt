@@ -1,5 +1,6 @@
 package edu.spring.stories
 
+import edu.spring.stories.entities.*
 import edu.spring.stories.repositories.StoryRepository
 import edu.spring.stories.repositories.DeveloperRepository
 import org.junit.jupiter.api.Test
@@ -31,7 +32,7 @@ class StoryRepositoryTest {
 
     @Test
     fun removeDog(){
-        var story=Story("Imprimer")
+        var story= Story("Imprimer")
         story=storyRepository.save(story)
         assert(storyRepository.count()==1L)
         assert(storyRepository.findByDeveloperIsNull().count()==1)
@@ -54,7 +55,7 @@ class StoryRepositoryTest {
 
     @Test
     fun findDogByNameAndMasterIdTest(){
-        var developer=Developer("John","DOE")
+        var developer= Developer("John","DOE")
         developer.addStory(Story("Imprimer"))
         developer.addStory(Story("Se connecter"))
         developer=developerRepository.save(developer)

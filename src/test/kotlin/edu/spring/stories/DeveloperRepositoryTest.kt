@@ -1,5 +1,6 @@
 package edu.spring.stories
 
+import edu.spring.stories.entities.*
 import edu.spring.stories.repositories.StoryRepository
 import edu.spring.stories.repositories.DeveloperRepository
 import org.assertj.core.api.Assertions
@@ -26,14 +27,14 @@ class DeveloperRepositoryTest {
 
     @Test
     fun emptyAtInitialization(){
-        assert(developerRepository.count()==0L)
+        assert(developerRepository.count().toLong() ==0L)
     }
 
     @Test
     fun addMaster(){
         var developer=Developer("John","DOE")
         developer=developerRepository.save(developer)
-        assert(developerRepository.count()==1L)
+        assert(developerRepository.count().toLong() ==1L)
         Assertions.assertThat(developer).hasFieldOrPropertyWithValue("firstname", "John")
         Assertions.assertThat(developer).hasFieldOrPropertyWithValue("lastname", "DOE")
     }
@@ -41,7 +42,7 @@ class DeveloperRepositoryTest {
     @Test
     fun addMasterAndDogs(){
         var dev=createDevWithStories()
-        assert(developerRepository.count()==1L)
+        assert(developerRepository.count().toLong() ==1L)
         assertTrue(dev.stories.elementAt(0).name=="Imprimer")
         assertTrue(dev.stories.elementAt(1).name=="Se connecter")
         assertEquals(dev.stories.elementAt(0).developer,dev)
