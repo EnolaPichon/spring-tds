@@ -1,6 +1,0 @@
-évalutation :
- 	- revoir les chemins
-	- routes
-	- tous doc autorisés
-	- REVOIR AVEC JV -- URGENT
-	- bidoung ? site à aller voir, verif orthographe
