@@ -8,6 +8,14 @@ open class User() {
     constructor(username:String):this(){
         this.username=username
     }
+    @PreRemove
+    fun preRemove (user: User) {
+        for (complain in complaints) {
+            if (complain.user == user) {
+                complain.user = null
+            }
+        }
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
