@@ -36,11 +36,11 @@ class Domain() {
         if(!hasChildren()){
             return complaints.size
         }
-        var nb = complaints.size
+        var nombre = complaints.size
         children.forEach{
-            nb += it.getComplaintsCount()
+            nombre += it.getComplaintsCount()
         }
-        return nb;
+        return nombre;
     }
 
     fun getSubComplaints():List<Complaint>{
