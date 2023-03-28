@@ -44,15 +44,17 @@ class Domain() {
     }
 
     fun getSubComplaints():List<Complaint>{
-        if(!hasChildren()) return complaints
-        var comp= mutableListOf<Complaint>()
+        if(!hasChildren()) {
+            return complaints
+        }
+        var compt= mutableListOf<Complaint>()
         for (complaint in complaints) {
-            comp += complaint
+            compt += complaint
         }
-        for (child in children) {
-            comp += child.getSubComplaints()
+        for (children in children) {
+            compt += children.getSubComplaints()
         }
-        return comp
+        return compt
     }
 
     private fun hasChildren():Boolean{
