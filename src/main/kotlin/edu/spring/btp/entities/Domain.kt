@@ -9,25 +9,6 @@ class Domain() {
         this.parent = parent
     }
 
-    fun getComplaintsCount (domains : Domain) : Int {
-        var nombre : Int = 0
-        for (children in children ) {
-            if (children.parent == domains) {
-                nombre += 1
-            }
-        }
-        return nombre
-    }
-
-    fun hasChildren (domains : Domain) : Boolean{
-        for (children in children ) {
-            if (children.parent == domains) {
-                return true
-            }
-        }
-        return false
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id = 0
@@ -51,4 +32,33 @@ class Domain() {
     @OneToMany(mappedBy = "domain")
     open var complaints= mutableListOf<Complaint>()
 
+    fun getComplaintsCount():Int{
+        if(!hasChildren()){
+            return complaints.size
+        }
+        var nb = complaints.size
+        children.forEach{
+            nb += it.getComplaintsCount()
+        }
+        return nb;
+    }
+
+    fun getSubComplaints():List<Complaint>{
+        if(!hasChildren()) return complaints
+        var comp= mutableListOf<Complaint>()
+        for (complaint in complaints) {
+            comp += complaint
+        }
+        for (child in children) {
+            comp += child.getSubComplaints()
+        }
+        return comp
+    }
+
+    private fun hasChildren():Boolean{
+        if (children.size > 0) {
+            return true
+        }
+        return false
+    }
 }

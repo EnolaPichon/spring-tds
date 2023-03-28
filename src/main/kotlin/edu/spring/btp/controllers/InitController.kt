@@ -6,10 +6,12 @@ import edu.spring.btp.entities.Provider
 import edu.spring.btp.entities.User
 import io.github.serpro69.kfaker.faker
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.UserDetailsService
+//import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.view.RedirectView
 
 @Controller
 @RequestMapping("/init")
@@ -26,10 +28,11 @@ class InitController {
     @Autowired
     lateinit var providerRepository: edu.spring.btp.repositories.ProviderRepository
 
-    @Autowired
-    lateinit var dbUserService: UserDetailsService
+//    @Autowired
+//    lateinit var dbUserService: UserDetailsService
 
-    private fun initProviders(count:Int){
+    @GetMapping("/init/all/{count}")
+    private fun initProviders(@PathVariable count:Int):RedirectView{
         val faker = faker { }
         for (i in 1..count){
             val provider = Provider(faker.company.name())
@@ -45,6 +48,7 @@ class InitController {
                 println(e)
             }
         }
+        return RedirectView("/")
     }
 
     private fun initUsers(count:Int){
